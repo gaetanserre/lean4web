@@ -12,18 +12,7 @@ We have set up the project on a Ubuntu Server 22.10.
 Here are the installation instructions:
 
 Install Docker:
-```
-sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg lsb-release -y
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-```
-(copied from https://docs.docker.com/engine/install/ubuntu/)
+https://docs.docker.com/engine/install/ubuntu/
 
 To be able to run docker containers as a regular user,
 add yourself to the `docker` group:
@@ -33,18 +22,7 @@ sudo usermod -aG docker ${USER}
 newgrp docker
 ```
 Install gVisor:
-```
-sudo apt-get update && \
-sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg
-curl -fsSL https://gvisor.dev/archive.key | sudo gpg --dearmor -o /usr/share/keyrings/gvisor-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gvisor-archive-keyring.gpg] https://storage.googleapis.com/gvisor/releases release main" | sudo tee /etc/apt/sources.list.d/gvisor.list > /dev/null
-sudo apt-get update && sudo apt-get install -y runsc
-```
-(copied from https://gvisor.dev/docs/user_guide/install/#install-from-an-apt-repository)
+https://gvisor.dev/docs/user_guide/install/#install-from-an-apt-repository
 
 To make sure that docker knows about gVisor, run these commands:
 ```
@@ -57,6 +35,11 @@ Install NPM (don't use `apt-get` since it will give you an outdated version of n
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 source ~/.bashrc
 nvm install node npm
+```
+
+Install jq:
+```
+sudo apt-get install jq
 ```
 
 Now, install `git` and clone this repository.
