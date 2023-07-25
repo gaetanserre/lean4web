@@ -59,7 +59,8 @@ const Editor: React.FC<{setRestart?, onDidChangeContent?, value: string, vertica
         },
         tabSize: 2,
         'semanticHighlighting.enabled': true,
-        theme: 'vs-code-theme-converted'
+        theme: 'github-gray-theme-converted',
+        wordWrap: 'on',
       })
       setEditor(editor)
       new AbbreviationRewriter(new AbbreviationProvider(), model, editor)

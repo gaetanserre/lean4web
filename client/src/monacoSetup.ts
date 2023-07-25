@@ -1,6 +1,7 @@
 import { Registry } from 'monaco-textmate' // peer dependency
 import { wireTmGrammars } from 'monaco-editor-textmate'
 import * as lightPlusTheme from './lightPlus.json'
+import * as githubGrayTheme from './githubGray.json'
 import * as leanSyntax from './syntaxes/lean.json'
 import * as leanMarkdownSyntax from './syntaxes/lean-markdown.json'
 import * as codeblockSyntax from './syntaxes/codeblock.json'
@@ -25,6 +26,7 @@ export function monacoSetup () {
   grammars.set('lean4', 'source.lean')
 
   monaco.editor.defineTheme('vs-code-theme-converted', lightPlusTheme as any);
+  monaco.editor.defineTheme('github-gray-theme-converted', githubGrayTheme as any);
 
   // register Monaco languages
   monaco.languages.register({
