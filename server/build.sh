@@ -5,12 +5,12 @@ SECONDS=0
 # Operate in the directory where this file is located
 cd $(dirname $0)
 
-(cd LeanProject &&
-  rm -f ./lake-manifest.json &&
-  lake update && # download latest mathlib
-  cp ./lake-packages/mathlib/lean-toolchain . && # copy lean version of mathlib
-  lake exe cache get &&
-  lake build)
+#(rm -rf LeanProject &&
+# lake +leanprover/lean4:nightly-2023-02-04 new LeanProject math &&
+# cd LeanProject &&
+# lake update &&
+# lake exe cache get &&
+# lake build)
 
 # Build elan image if not already present
 docker build --pull --rm -f lean.Dockerfile -t lean:latest .
