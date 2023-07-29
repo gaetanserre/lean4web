@@ -13,7 +13,7 @@ import Settings from './Settings'
 import Version from './Version'
 import Examples from './Examples'
 import { useWindowDimensions } from './window_width'
-
+const path = require("path")
 
 const App: React.FC = () => {
   const [restart, setRestart] = useState()
@@ -42,6 +42,19 @@ const App: React.FC = () => {
   const [content, setContent] = useState<string>('')
   const [url, setUrl] = useState<string>(null)
   const [contentFromUrl, setContentFromUrl] = useState<string>(null)
+  const [open, setOpen] = useState(false);
+
+  const loadFromUrl = (url) => {
+    setUrl((oldUrl) => {
+      if (oldUrl === url) {
+        setContent(contentFromUrl)
+      }
+      return url
+    })
+  }
+
+  // http%3A%2Flocalhost%3A8080%2Fexamples%2Fbijection.lean
+  // http%3A%2F%2Flocalhost%3A8080%2Fexamples%2Fbijection.lean
 
   const readHash = () => {
     if (window.location.hash.startsWith('#code=')) {
@@ -49,6 +62,12 @@ const App: React.FC = () => {
     }
     if (window.location.hash.startsWith('#url=')) {
       setUrl(decodeURIComponent(window.location.hash.substring(5)));
+    }
+    if (window.location.hash.startsWith('#project=')) {
+      const project = decodeURIComponent(window.location.hash.substring(9)).split('/');
+      const code_path = path.join('projects', project[0], project[1]);
+      setUrl(code_path);
+      console.log(code_path);
     }
   }
   if ("onhashchange" in window) // does the browser support the hashchange event?
@@ -101,15 +120,6 @@ const App: React.FC = () => {
     };
 
     fileReader.readAsText(fileToLoad, "UTF-8");
-  }
-
-  const loadFromUrl = (url) => {
-    setUrl((oldUrl) => {
-      if (oldUrl === url) {
-        setContent(contentFromUrl)
-      }
-      return url
-    })
   }
 
   return (

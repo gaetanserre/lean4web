@@ -88,6 +88,10 @@ module.exports = env => {
           from: '**/*',
           to: 'examples/',
         }, {
+          context: path.resolve(__dirname, 'client', 'public', 'projects'),
+          from: '**/*',
+          to: 'projects/',
+        }, {
           context: path.resolve(path.dirname(require.resolve('@leanprover/infoview/package.json')), 'dist'),
           from: '*.production.min.js',
         }]
