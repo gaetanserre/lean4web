@@ -88,7 +88,7 @@ module.exports = env => {
           from: '**/*',
           to: 'examples/',
         }, {
-          context: path.resolve(__dirname, 'client', 'public', 'projects'),
+          context: path.resolve(__dirname, 'server', 'LeanProject'),
           from: '**/*',
           to: 'projects/',
         }, {
